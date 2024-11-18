@@ -1,10 +1,9 @@
-from textnode import *
+from textnode import TextNode, TextType
 
 
 def main():
-    """docstring"""
-    test = TextNode("text", TextType.NORMAL, "https://www.boot.dev")
-    print(test)
+    node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
+    print(node)
 
 
 main()
