@@ -2,6 +2,7 @@ import os
 import shutil
 import time
 
+from gencontent import generate_page, generate_pages_recursive
 from textnode import TextNode, TextType
 
 
@@ -15,9 +16,15 @@ def main():
     )
     public_dir = os.path.join(project_dir, "public")
     static_dir = os.path.join(project_dir, "static")
+    content_dir = os.path.join(project_dir, "content")
+
+    template_path = os.path.join(project_dir, "template.html")
 
     refresh_directory(public_dir)
     copy_static(static_dir, public_dir)
+
+    print("Generating Page...")
+    generate_pages_recursive(content_dir, template_path, public_dir)
 
 
 def copy_static(from_dir, to_dir):
@@ -43,13 +50,13 @@ def copy_static(from_dir, to_dir):
             copy_static(new_from_dir, new_to_dir)
 
 
-def refresh_directory(dir):
+def refresh_directory(directory):
 
-    if os.path.exists(dir):
-        shutil.rmtree(dir)
+    if os.path.exists(directory):
+        shutil.rmtree(directory)
         print("deleting existing public directory...")
         time.sleep(2)
-        os.mkdir(dir)
+        os.mkdir(directory)
         print("creating blank public directory")
 
 

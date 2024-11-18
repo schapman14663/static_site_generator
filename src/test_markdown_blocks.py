@@ -8,6 +8,7 @@ from markdown_blocks import (
     block_type_paragraph,
     block_type_quote,
     block_type_ulist,
+    extract_title,
     markdown_to_blocks,
     markdown_to_html_node,
 )
@@ -153,6 +154,17 @@ this is paragraph text
             html,
             "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>",
         )
+
+    def test_title(self):
+        md = """
+# this is an h1
+        
+this is paragraph text
+
+## this is an h2
+        """
+        node = extract_title(md)
+        self.assertEqual(node, "this is an h1")
 
 
 if __name__ == "__main__":
